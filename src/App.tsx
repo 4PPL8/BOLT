@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProductProvider } from './contexts/ProductContext';
 import Navbar from './components/Navbar';
@@ -14,35 +15,47 @@ import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboard from './pages/AdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 
+const AppContent: React.FC = () => {
+  const location = useLocation();
+  
+  // Pages where footer should not be displayed
+  const noFooterPages = ['/login', '/register', '/admin-login'];
+  const shouldShowFooter = !noFooterPages.includes(location.pathname);
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <main className="min-h-screen">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:category" element={<ProductsPage />} />
+          <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/admin-login" element={<AdminLoginPage />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </main>
+      {shouldShowFooter && <Footer />}
+    </div>
+  );
+};
+
 function App() {
   return (
     <AuthProvider>
       <ProductProvider>
         <Router>
-          <div className="min-h-screen bg-gray-50">
-            <Navbar />
-            <main className="min-h-screen">
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/products" element={<ProductsPage />} />
-                <Route path="/products/:category" element={<ProductsPage />} />
-                <Route path="/product/:id" element={<ProductDetailPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/admin-login" element={<AdminLoginPage />} />
-                <Route
-                  path="/admin"
-                  element={
-                    <ProtectedRoute>
-                      <AdminDashboard />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
+          <AppContent />
         </Router>
       </ProductProvider>
     </AuthProvider>
