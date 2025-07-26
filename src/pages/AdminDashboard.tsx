@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Edit3, Trash2, Eye, Upload, X, Check, AlertTriangle } from 'lucide-react';
+import { Plus, Edit3, Trash2, Eye, Upload, X, Check, AlertTriangle, Loader2 } from 'lucide-react';
 import { useProducts, Product } from '../contexts/ProductContext';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -105,10 +105,12 @@ const AdminDashboard: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
     // Validation
     if (!formData.name.trim() || !formData.category || !formData.description.trim() || !formData.image) {
       alert('Please fill in all required fields');
+      setIsSubmitting(false);
       return;
     }
 
@@ -122,13 +124,29 @@ const AdminDashboard: React.FC = () => {
       features: filteredFeatures
     };
 
-    if (modalMode === 'add') {
-      addProduct(productData);
-    } else if (selectedProduct) {
-      updateProduct(selectedProduct.id, productData);
-    }
+    // Simulate processing time
+    setTimeout(() => {
+      if (modalMode === 'add') {
+        addProduct(productData);
+      } else if (selectedProduct) {
+        updateProduct(selectedProduct.id, productData);
+      }
+      setIsSubmitting(false);
+      handleCloseModal();
+    }, 1000);
+  };
 
-    handleCloseModal();
+  // Loading state for initial data load
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-12 w-12 animate-spin text-blue-600 mx-auto mb-4" />
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">Loading Dashboard...</h2>
+          <p className="text-gray-600">Please wait while we load your data</p>
+        </div>
+      </div>
+    );
   };
 
   const handleDelete = (id: string) => {
@@ -464,10 +482,20 @@ const AdminDashboard: React.FC = () => {
                     </button>
                     <button
                       type="submit"
-                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                      disabled={isSubmitting}
+                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                     >
-                      <Check className="w-4 h-4 inline-block mr-2" />
-                      {modalMode === 'add' ? 'Add Product' : 'Update Product'}
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                          {modalMode === 'add' ? 'Adding...' : 'Updating...'}
+                        </>
+                      ) : (
+                        <>
+                          <Check className="w-4 h-4 mr-2" />
+                          {modalMode === 'add' ? 'Add Product' : 'Update Product'}
+                        </>
+                      )}
                     </button>
                   </div>
                 </form>

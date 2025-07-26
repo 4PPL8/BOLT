@@ -30,6 +30,13 @@ const ADMIN_CREDENTIALS = {
   password: 'admin123'
 };
 
+// Additional admin user
+const ADMIN_CREDENTIALS_2 = {
+  name: 'Zubair Admin',
+  email: 'hzubair25@gmail.com',
+  password: '123ha45mid'
+};
+
 // Simple password encryption (in production, use proper hashing)
 const encryptPassword = (password: string): string => {
   return btoa(password + 'alburaq_salt');
@@ -159,11 +166,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const loginAdmin = (name: string, email: string, password: string): boolean => {
-    if (
+    // Check against both admin accounts
+    const isFirstAdmin = (
       name === ADMIN_CREDENTIALS.name &&
       email === ADMIN_CREDENTIALS.email &&
       password === ADMIN_CREDENTIALS.password
-    ) {
+    );
+    
+    const isSecondAdmin = (
+      name === ADMIN_CREDENTIALS_2.name &&
+      email === ADMIN_CREDENTIALS_2.email &&
+      password === ADMIN_CREDENTIALS_2.password
+    );
+    
+    if (isFirstAdmin || isSecondAdmin) {
       const sessionData = { name, email };
       localStorage.setItem('admin_session', JSON.stringify(sessionData));
       setIsAdminAuthenticated(true);

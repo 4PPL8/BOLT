@@ -168,7 +168,10 @@ const AdminLoginPage: React.FC = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Not an admin?{' '}
-              <Link to="/login" className="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200">
+              <Link 
+                to="/login" 
+                className="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200"
+              >
                 User login here
               </Link>
             </p>

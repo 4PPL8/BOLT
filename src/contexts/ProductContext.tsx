@@ -11,6 +11,7 @@ export interface Product {
 
 interface ProductContextType {
   products: Product[];
+  isLoading: boolean;
   categories: string[];
   addProduct: (product: Omit<Product, 'id'>) => void;
   updateProduct: (id: string, product: Omit<Product, 'id'>) => void;
