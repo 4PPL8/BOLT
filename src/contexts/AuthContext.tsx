@@ -190,6 +190,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return false;
   };
 
+  const loginAdminByEmail = (email: string, password: string): boolean => {
+    // Check against both admin accounts by email and password only
+    const isFirstAdmin = (
+      email === ADMIN_CREDENTIALS.email &&
+      password === ADMIN_CREDENTIALS.password
+    );
+    
+    const isSecondAdmin = (
+      email === ADMIN_CREDENTIALS_2.email &&
+      password === ADMIN_CREDENTIALS_2.password
+    );
+    
+    if (isFirstAdmin) {
+      const sessionData = { name: ADMIN_CREDENTIALS.name, email };
+      localStorage.setItem('admin_session', JSON.stringify(sessionData));
+      setIsAdminAuthenticated(true);
+      setAdminInfo(sessionData);
+      return true;
+    } else if (isSecondAdmin) {
+      const sessionData = { name: ADMIN_CREDENTIALS_2.name, email };
+      localStorage.setItem('admin_session', JSON.stringify(sessionData));
+      setIsAdminAuthenticated(true);
+      setAdminInfo(sessionData);
+      return true;
+    }
+    return false;
+  };
   const logoutAdmin = () => {
     localStorage.removeItem('admin_session');
     setIsAdminAuthenticated(false);
