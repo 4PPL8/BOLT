@@ -30,6 +30,11 @@ const initialProducts: Product[] = [
     category: 'Cosmetics & Personal Care',
     description: 'High-quality hair color for vibrant and long-lasting results.',
     image: 'https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg',
+    images: [
+      'https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg',
+      'https://images.pexels.com/photos/3738673/pexels-photo-3738673.jpeg',
+      'https://images.pexels.com/photos/3762879/pexels-photo-3762879.jpeg'
+    ],
     features: ['Long-lasting color', 'Natural ingredients', 'Easy application']
   },
   {
@@ -165,7 +170,8 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const addProduct = (product: Omit<Product, 'id'>) => {
     const newProduct = {
       ...product,
-      id: Date.now().toString()
+      id: Date.now().toString(),
+      images: product.images || [product.image]
     };
     const newProducts = [...products, newProduct];
     saveProducts(newProducts);

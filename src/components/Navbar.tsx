@@ -26,7 +26,9 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <Package className="h-8 w-8 text-blue-600" />
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-yellow-500 rounded-full flex items-center justify-center mr-2">
+                <Package className="h-6 w-6 text-white" />
+              </div>
               <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-yellow-500 bg-clip-text text-transparent">
                 Al Buraq Industries
               </span>
@@ -233,10 +235,10 @@ const Navbar: React.FC = () => {
             {isAdminAuthenticated && (
               <>
                 <Link
-                  to="/admin"
+                  to="/admin/dashboard"
                   onClick={() => setIsOpen(false)}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                    isActive('/admin') 
+                    isActive('/admin/dashboard') || isActive('/admin')
                       ? 'text-yellow-600 bg-yellow-50' 
                       : 'text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50'
                   }`}

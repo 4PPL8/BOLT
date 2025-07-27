@@ -13,13 +13,14 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import ContactPage from './pages/ContactPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminLogin from './pages/AdminLogin';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const AppContent: React.FC = () => {
   const location = useLocation();
   
   // Pages where footer should not be displayed
-  const noFooterPages = ['/login', '/register', '/admin-login'];
+  const noFooterPages = ['/login', '/register', '/admin-login', '/admin/login'];
   const shouldShowFooter = !noFooterPages.includes(location.pathname);
 
   return (
@@ -35,8 +36,17 @@ const AppContent: React.FC = () => {
           <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/admin-login" element={<AdminLoginPage />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
           <Route
             path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/dashboard"
             element={
               <ProtectedRoute>
                 <AdminDashboard />

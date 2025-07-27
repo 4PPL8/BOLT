@@ -8,6 +8,23 @@ const HomePage: React.FC = () => {
   const { products, categories, isLoading } = useProducts();
   const featuredProducts = products.slice(0, 6);
 
+  // Category images mapping
+  const categoryImages = {
+    'Cosmetics & Personal Care': 'https://images.pexels.com/photos/3762879/pexels-photo-3762879.jpeg',
+    'Razors': 'https://images.pexels.com/photos/713297/pexels-photo-713297.jpeg',
+    'Toothbrush': 'https://images.pexels.com/photos/298586/pexels-photo-298586.jpeg',
+    'Agarbatti (Incense Sticks)': 'https://images.pexels.com/photos/6663598/pexels-photo-6663598.jpeg',
+    'Natural / Herbal Products': 'https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg',
+    'Adhesive Tape': 'https://images.pexels.com/photos/4226881/pexels-photo-4226881.jpeg',
+    'PVC Tape': 'https://images.pexels.com/photos/4226881/pexels-photo-4226881.jpeg',
+    'Stationery': 'https://images.pexels.com/photos/159751/book-address-book-learning-learn-159751.jpeg',
+    'Stationery Tapes': 'https://images.pexels.com/photos/4226881/pexels-photo-4226881.jpeg',
+    'Baby Products (Soothers)': 'https://images.pexels.com/photos/1296397/pexels-photo-1296397.jpeg',
+    'Cleaning Products': 'https://images.pexels.com/photos/4239091/pexels-photo-4239091.jpeg',
+    'Pest Control': 'https://images.pexels.com/photos/4239091/pexels-photo-4239091.jpeg',
+    'Craft Supplies': 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg'
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -26,6 +43,15 @@ const HomePage: React.FC = () => {
       <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white">
         <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+          {/* Centered Logo Circle */}
+          <div className="flex justify-center mb-8">
+            <div className="w-32 h-32 md:w-40 md:h-40 bg-white rounded-full flex items-center justify-center shadow-2xl transform hover:scale-105 transition-transform duration-300">
+              <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-600 to-yellow-500 rounded-full flex items-center justify-center">
+                <Sparkles className="w-12 h-12 md:w-16 md:h-16 text-white" />
+              </div>
+            </div>
+          </div>
+          
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Welcome to{' '}
@@ -117,15 +143,16 @@ const HomePage: React.FC = () => {
               <Link
                 key={category}
                 to={`/products/${encodeURIComponent(category)}`}
-                className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-center group"
+                className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-center group"
               >
-                <div className={`w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-xl font-bold
-                  ${index % 4 === 0 ? 'bg-blue-500' : 
-                    index % 4 === 1 ? 'bg-yellow-500' : 
-                    index % 4 === 2 ? 'bg-green-500' : 'bg-purple-500'}`}>
-                  {category.charAt(0)}
+                <div className="w-16 h-16 rounded-full mx-auto mb-3 overflow-hidden shadow-md">
+                  <img
+                    src={categoryImages[category as keyof typeof categoryImages] || 'https://images.pexels.com/photos/159751/book-address-book-learning-learn-159751.jpeg'}
+                    alt={category}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
                 </div>
-                <h3 className="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-200">
+                <h3 className="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-200 text-sm">
                   {category}
                 </h3>
               </Link>

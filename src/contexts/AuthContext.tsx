@@ -17,6 +17,7 @@ interface AuthContextType {
   // Admin authentication
   isAdminAuthenticated: boolean;
   loginAdmin: (name: string, email: string, password: string) => boolean;
+  loginAdminByEmail: (email: string, password: string) => boolean;
   logoutAdmin: () => void;
   adminInfo: { name: string; email: string } | null;
 }
@@ -204,6 +205,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       logoutUser,
       isAdminAuthenticated,
       loginAdmin,
+      loginAdminByEmail,
       logoutAdmin,
       adminInfo
     }}>

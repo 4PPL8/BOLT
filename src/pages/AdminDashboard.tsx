@@ -73,6 +73,13 @@ const AdminDashboard: React.FC = () => {
     }));
   };
 
+  const addImage = () => {
+    setFormData(prev => ({
+      ...prev,
+      images: [...prev.images, '']
+    }));
+  };
+
   const removeFeature = (index: number) => {
     setFormData(prev => ({
       ...prev,
@@ -413,7 +420,7 @@ const AdminDashboard: React.FC = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Product Image *
+                      Main Product Image *
                     </label>
                     <div className="space-y-4">
                       <input
@@ -434,6 +441,41 @@ const AdminDashboard: React.FC = () => {
                       <p className="text-xs text-gray-500">
                         Supported formats: JPG, PNG. Max size: 2MB
                       </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Additional Product Images
+                    </label>
+                    <div className="space-y-2">
+                      {formData.images.map((image, index) => (
+                        <div key={index} className="flex items-center space-x-2">
+                          <input
+                            type="url"
+                            value={image}
+                            onChange={(e) => handleImageChange(index, e.target.value)}
+                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter image URL"
+                          />
+                          {formData.images.length > 1 && (
+                            <button
+                              type="button"
+                              onClick={() => removeImage(index)}
+                              className="text-red-600 hover:text-red-800 p-1"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={addImage}
+                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                      >
+                        + Add Another Image
+                      </button>
                     </div>
                   </div>
 

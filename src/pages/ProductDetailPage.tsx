@@ -49,12 +49,37 @@ const ProductDetailPage: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Product Image */}
-            <div className="aspect-square lg:aspect-auto">
+            <div className="aspect-square lg:aspect-auto relative">
               <img
-                src={product.image}
+                src={currentImage}
                 alt={product.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-all duration-300"
               />
+              
+              {/* Image Thumbnails */}
+              {productImages.length > 1 && (
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="flex space-x-2 overflow-x-auto pb-2">
+                    {productImages.map((image, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                          index === currentImageIndex
+                            ? 'border-blue-500 ring-2 ring-blue-200'
+                            : 'border-white hover:border-blue-300'
+                        }`}
+                      >
+                        <img
+                          src={image}
+                          alt={`${product.name} ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Product Details */}
