@@ -6,7 +6,7 @@ import ProductCard from '../components/ProductCard';
 
 const ProductsPage: React.FC = () => {
   const { category } = useParams();
-  const { products, categories } = useProducts();
+  const { products, categories, isLoading } = useProducts();
   const [selectedCategory, setSelectedCategory] = useState(category || 'All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);
