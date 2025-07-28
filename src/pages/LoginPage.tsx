@@ -149,7 +149,7 @@ const LoginPage: React.FC = () => {
           <div className="mt-4 text-center">
             <p className="text-xs text-gray-500">
               Are you an Admin?{' '}
-              <Link to="/admin-login" className="text-yellow-600 hover:text-yellow-700 font-medium transition-colors duration-200">
+              <Link to="/admin/login" className="text-yellow-600 hover:text-yellow-700 font-medium transition-colors duration-200">
                 <Shield className="inline h-3 w-3 mr-1" />
                 Login here
               </Link>

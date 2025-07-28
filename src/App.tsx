@@ -13,7 +13,6 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import ContactPage from './pages/ContactPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboard from './pages/AdminDashboard';
-import AdminLogin from './pages/AdminLogin';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const AppContent: React.FC = () => {
@@ -36,7 +35,7 @@ const AppContent: React.FC = () => {
           <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/admin-login" element={<AdminLoginPage />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
           <Route
             path="/admin"
             element={

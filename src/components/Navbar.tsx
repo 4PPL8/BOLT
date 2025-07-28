@@ -115,9 +115,9 @@ const Navbar: React.FC = () => {
             {isAdminAuthenticated && (
               <>
                 <Link
-                  to="/admin"
+                  to="/admin/dashboard"
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    isActive('/admin') 
+                    isActive('/admin/dashboard') || isActive('/admin')
                       ? 'text-yellow-600 bg-yellow-50' 
                       : 'text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50'
                   }`}

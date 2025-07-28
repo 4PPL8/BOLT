@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Package, Shield, Truck, Star } from 'lucide-react';
+import { ArrowRight, Package, Shield, Truck, Star, Zap } from 'lucide-react';
 import { useProducts } from '../contexts/ProductContext';
 import ProductCard from '../components/ProductCard';
 
@@ -47,7 +47,7 @@ const HomePage: React.FC = () => {
           <div className="flex justify-center mb-8">
             <div className="w-32 h-32 md:w-40 md:h-40 bg-white rounded-full flex items-center justify-center shadow-2xl transform hover:scale-105 transition-transform duration-300">
               <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-600 to-yellow-500 rounded-full flex items-center justify-center">
-                <Sparkles className="w-12 h-12 md:w-16 md:h-16 text-white" />
+                <Zap className="w-12 h-12 md:w-16 md:h-16 text-white" />
               </div>
             </div>
           </div>

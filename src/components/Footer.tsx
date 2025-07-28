@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
               <Link to="/contact" className="block text-gray-300 hover:text-white transition-colors duration-200">
                 Contact
               </Link>
-              <Link to="/admin-login" className="block text-gray-400 hover:text-gray-300 transition-colors duration-200 text-sm">
+              <Link to="/admin/login" className="block text-gray-400 hover:text-gray-300 transition-colors duration-200 text-sm">
                 Admin Access
               </Link>
             </div>
